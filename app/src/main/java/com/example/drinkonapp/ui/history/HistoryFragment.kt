@@ -7,12 +7,16 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.drinkonapp.R
 import com.example.drinkonapp.SharedPreferencesHelper
 import com.example.drinkonapp.databinding.FragmentHistoryBinding
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class HistoryFragment : Fragment() {
 
     private var _binding: FragmentHistoryBinding? = null
+    private lateinit var clearHistoryBtn: FloatingActionButton
+    private lateinit var sharedPreferencesHelper: SharedPreferencesHelper
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -23,26 +27,21 @@ class HistoryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val historyViewModel =
-            ViewModelProvider(this)[HistoryViewModel::class.java]
-
+        sharedPreferencesHelper = SharedPreferencesHelper(requireContext())
         _binding = FragmentHistoryBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        val textView: TextView = binding.textHistory
-        historyViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-
 
         context?.let {
             val history = SharedPreferencesHelper(it).getSearchHistory()
             val formattedHistory = history.replace(",", "\n")
             binding.textHistory.text = formattedHistory
-
         }
 
-
+        clearHistoryBtn = root.findViewById(R.id.clear_history)
+        clearHistoryBtn.setOnClickListener {
+            sharedPreferencesHelper.clearSearchHistory()
+            updateHistory()
+        }
 
         return root
     }
