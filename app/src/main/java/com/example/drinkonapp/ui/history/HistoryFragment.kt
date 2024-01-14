@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.drinkonapp.SharedPreferencesHelper
 import com.example.drinkonapp.databinding.FragmentHistoryBinding
 
 class HistoryFragment : Fragment() {
@@ -23,7 +24,7 @@ class HistoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val historyViewModel =
-            ViewModelProvider(this).get(HistoryViewModel::class.java)
+            ViewModelProvider(this)[HistoryViewModel::class.java]
 
         _binding = FragmentHistoryBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -32,11 +33,37 @@ class HistoryFragment : Fragment() {
         historyViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
+
+        context?.let {
+            val history = SharedPreferencesHelper(it).getSearchHistory()
+            val formattedHistory = history.replace(",", "\n")
+            binding.textHistory.text = formattedHistory
+
+        }
+
+
+
         return root
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        updateHistory()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+
+    private fun updateHistory() {
+        context?.let {
+            val historyList = SharedPreferencesHelper(it).getReversedSearchHistory()
+            val formattedHistory = historyList.joinToString("\n")
+            binding.textHistory.text = formattedHistory
+        }
     }
 }
