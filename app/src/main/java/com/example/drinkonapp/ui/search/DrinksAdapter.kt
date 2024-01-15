@@ -1,6 +1,7 @@
 package com.example.drinkonapp.ui.search
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,7 +49,7 @@ class DrinksAdapter(private val context: Context, private val drinksList: List<D
 
     }
 
-    fun toggleFavorite(drink: Drink, holder: DrinkViewHolder) {
+    private fun toggleFavorite(drink: Drink, holder: DrinkViewHolder) {
         drink.isFavorite = !drink.isFavorite
         saveFavoriteState(drink.id, drink.isFavorite)
         holder.btnFavorite.setImageResource(if (drink.isFavorite) R.drawable.baseline_favorite_32 else R.drawable.baseline_favorite_border_32)
