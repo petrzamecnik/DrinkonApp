@@ -48,9 +48,13 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
+    implementation ("androidx.constraintlayout:constraintlayout:2.0.4")
     implementation ("com.squareup.okhttp3:okhttp:4.9.0")
     implementation ("com.squareup.moshi:moshi:1.12.0")
     implementation ("com.squareup.moshi:moshi-kotlin:1.12.0")
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

@@ -2,20 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:gravity="center_vertical">
 
+    <!-- Thumbnail Image -->
+    <ImageView
+        android:id="@+id/imgThumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/baseline_favorite_24" />
+
+    <!-- Name of the Drink -->
     <TextView
         android:id="@+id/tvDrinkName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="Drink Name"
         android:textSize="18sp"
-        android:textStyle="bold"/>
+        android:gravity="left" />
 
-    <TextView
-        android:id="@+id/tvDrinkInstructions"
+    <!-- Favorite Button -->
+    <ImageButton
+        android:id="@+id/btnFavorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"/>
-
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground"
+        android:src="@drawable/baseline_favorite_24" />
 </LinearLayout>
