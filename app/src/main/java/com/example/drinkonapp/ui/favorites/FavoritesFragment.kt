@@ -22,6 +22,7 @@ class FavoritesFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var allDrinks: List<Drink>
     private lateinit var drinksAdapter: DrinksAdapter
+    private lateinit var favoriteDrinks: List<Drink>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,10 +35,22 @@ class FavoritesFragment : Fragment() {
         _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+
+
         val allDrinks = loadDrinksFromSharedPreferences(requireContext())
-        for (drink in allDrinks) {
+        favoriteDrinks = allDrinks.filter { it.isFavorite }
+        for (drink in favoriteDrinks) {
             Log.d("Drink", "Name: ${drink.name}, ID: ${drink.id}, Thumbnail: ${drink.thumbnail}, IsFavorite: ${drink.isFavorite}")
         }
+
+        drinksAdapter = DrinksAdapter(requireContext(), favoriteDrinks)
+
+
+        val favoriteRecyclerView = binding.favoritesRecyclerView
+        val layoutManager = LinearLayoutManager(requireContext())
+        favoriteRecyclerView.layoutManager = layoutManager
+
+        favoriteRecyclerView.adapter = drinksAdapter
 
 
 
