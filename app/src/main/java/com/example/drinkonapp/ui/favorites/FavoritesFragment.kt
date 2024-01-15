@@ -30,7 +30,7 @@ class FavoritesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val favoritesViewModel =
-            ViewModelProvider(this).get(FavoritesViewModel::class.java)
+            ViewModelProvider(this)[FavoritesViewModel::class.java]
 
         _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -47,7 +47,7 @@ class FavoritesFragment : Fragment() {
         return root
     }
 
-    fun loadDrinksFromSharedPreferences(context: Context): List<Drink> {
+    private fun loadDrinksFromSharedPreferences(context: Context): List<Drink> {
         val sharedPrefs = context.getSharedPreferences("AllDrinks", Context.MODE_PRIVATE)
         val drinksJson = sharedPrefs.getString("allDrinks", null)
         return if (drinksJson != null) {
