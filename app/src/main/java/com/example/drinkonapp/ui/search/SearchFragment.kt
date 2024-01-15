@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.drinkonapp.SharedPreferencesHelper
@@ -27,7 +28,6 @@ class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
     private lateinit var drinksAdapter: DrinksAdapter
-    private lateinit var sharedPrefs: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,10 +52,10 @@ class SearchFragment : Fragment() {
                 setOnItemClickListener(object : DrinksAdapter.OnItemClickListener {
                     override fun onItemClick(position: Int) {
                         val drinkId = drinks[position].id
+                        val bundle = Bundle()
+                        bundle.putString("drinkId", drinkId)
 
-                        // TODO: Navigate to the drink detail fragment or perform another action
-                        // Example: findNavController().navigate(SearchFragmentDirections.actionToShowDetail(drinkId))
-                        findNavController().navigate(R.id.fragmentDrinkDetail)
+                        findNavController().navigate(R.id.fragmentDrinkDetail, bundle)
                     }
                 })
             }

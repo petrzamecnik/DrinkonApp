@@ -11,6 +11,7 @@ data class Drink(
     @Json(name = "strDrink") val name: String,
     @Json(name = "strCategory") val category: String?,
     @Json(name = "strInstructions") val instructions: String?,
+    @Json(name = "strIngredients") val ingredients: String?,
     @Json(name = "strDrinkThumb") val thumbnail: String?,
     var isFavorite: Boolean = false
 )

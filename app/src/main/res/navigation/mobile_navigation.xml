@@ -26,6 +26,7 @@
     <fragment
         android:id="@+id/fragmentDrinkDetail"
         android:name="com.example.drinkonapp.ui.drink_detail.DrinkDetailFragment"
+        android:parentActivityName=".SearchFragment"
         android:label="Drink Detail"
         tools:layout="@layout/fragment_drink_detail" />
 </navigation>
