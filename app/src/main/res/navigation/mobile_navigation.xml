@@ -22,4 +22,10 @@
         android:name="com.example.drinkonapp.ui.favorites.FavoritesFragment"
         android:label="@string/title_favorites"
         tools:layout="@layout/fragment_favorites" />
+
+    <fragment
+        android:id="@+id/fragmentDrinkDetail"
+        android:name="com.example.drinkonapp.ui.drink_detail.DrinkDetailFragment"
+        android:label="Drink Detail"
+        tools:layout="@layout/fragment_drink_detail" />
 </navigation>

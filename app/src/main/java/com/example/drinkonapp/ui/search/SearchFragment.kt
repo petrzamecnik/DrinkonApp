@@ -11,12 +11,14 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.drinkonapp.SharedPreferencesHelper
 import com.example.drinkonapp.databinding.FragmentSearchBinding
 import kotlinx.coroutines.*
 import com.example.drinkonapp.JsonParser
 import com.example.drinkonapp.Drink
+import com.example.drinkonapp.R
 import com.google.gson.Gson
 
 
@@ -45,7 +47,19 @@ class SearchFragment : Fragment() {
     }
 
     private fun updateUIWithDrinks(drinks: List<Drink>) {
-        drinksAdapter = context?.let { DrinksAdapter(it, drinks) }!!
+        drinksAdapter = context?.let { ctx ->
+            DrinksAdapter(ctx, drinks).apply {
+                setOnItemClickListener(object : DrinksAdapter.OnItemClickListener {
+                    override fun onItemClick(position: Int) {
+                        val drinkId = drinks[position].id
+
+                        // TODO: Navigate to the drink detail fragment or perform another action
+                        // Example: findNavController().navigate(SearchFragmentDirections.actionToShowDetail(drinkId))
+                        findNavController().navigate(R.id.fragmentDrinkDetail)
+                    }
+                })
+            }
+        } ?: return
         binding.drinksRecyclerView.adapter = drinksAdapter
     }
 
